@@ -50,6 +50,7 @@
                         <textarea class="form-control" name="product_details" id="" cols="30" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Product</button>
+                    <button type="reset" id="reset" class="btn btn-warning">Reset</button>
                 </form>
             </div>
             </div>
@@ -77,6 +78,7 @@
                         <textarea id="editProductDetails" class="form-control" name="product_details" id="" cols="30" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Product</button>
+                    <button type="reset" id="reset" class="btn btn-warning">Reset</button>
                 </form>
             </div>
             </div>
@@ -102,6 +104,8 @@
                 success : function(){
                     $.get('{{ route('product.list') }}',function(data){
                         $('#productTable').empty().html(data);
+                        $('#staticBackdrop').modal('hide');
+                        $('#reset').click();
                     });
                 },
                 type : method,
@@ -127,6 +131,7 @@
                     $.get('{{ route('product.list') }}',function(data){
                         $('#productTable').empty().html(data);
                         $('#productEditModal').modal('hide');
+                        $('#reset').click();
                     });
                 },
                 type : method,
@@ -137,7 +142,6 @@
             $.get('{{ route('product.delete') }}',{product_id : id},function(){
                 $.get('{{ route('product.list') }}',function(data){
                     $('#productTable').empty().html(data);
-                    $('#productEditModal').modal('hide');
                 });
             });
         }
